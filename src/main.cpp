@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <display.cpp>
 
 int RightAudioInput = A0;
 
