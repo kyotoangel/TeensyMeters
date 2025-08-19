@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
+
 #include <ILI9341_t3n.h>
+#include <SPI.h>
 
 // pins de la teensy reliés à l'écran
 
@@ -12,8 +14,8 @@
 
 class Display {
     public : 
-        void begin(); //fonction d'initialisation
-        void testScreen(); // exemple pour afficher un message de test
+        void begin(); // déclaration de la fonction d'initialisation
+        void testScreen(); // déclaration de la fonction d'exemple pour afficher un message de test
     private :
         ILI9341_t3n tft = ILI9341_t3n(TFT_CS, TFT_DC, TFT_RST);
 };

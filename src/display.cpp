@@ -1,6 +1,4 @@
 #include <include/display.h>
-#include <Arduino.h>
-#include <SPI.h>
 
 void Display::begin() {
     tft.begin();

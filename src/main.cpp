@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <display.cpp>
+#include <include/display.h>
 
 // création d'un objet global display
 Display display;
