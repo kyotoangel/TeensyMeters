@@ -1,12 +1,20 @@
 #include <Arduino.h>
 #include <display.cpp>
 
-int RightAudioInput = A0;
+// création d'un objet global display
+Display display;
 
 void setup() {
-  Serial.begin(576000);
+  Serial.begin(9600);
+
+  //appel de la fonction d'initialisation du display
+
+  display.begin();
+
 }
 
 void loop() {
-  
+  //test: afficher rectangle rouge
+  display.testScreen();
+  delay(2000);
 }
