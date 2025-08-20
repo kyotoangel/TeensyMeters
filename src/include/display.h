@@ -15,7 +15,8 @@
 class Display {
     public : 
         void begin(); // déclaration de la fonction d'initialisation
-        void testScreen(); // déclaration de la fonction d'exemple pour afficher un message de test
+        void drawLUFSmeter(float LufsI, float LufsS, float LufsM); // déclaration de la fonction de dessin des barres LUFS
+        // LufsI = LUFS intégrés / LufsS = LUFS short-term / LufsM = LUFS momentary
     private :
         ILI9341_t3n tft = ILI9341_t3n(TFT_CS, TFT_DC, TFT_RST);
 };
