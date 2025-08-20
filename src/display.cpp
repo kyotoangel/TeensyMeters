@@ -12,8 +12,8 @@ void Display::begin() {
 
 void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
     LufsI = constrain(LufsI, -70, 0);
-    LufsS = constrain(LufsI, -70, 0);
-    LufsM = constrain(LufsI, -70, 0);
+    LufsS = constrain(LufsS, -70, 0);
+    LufsM = constrain(LufsM, -70, 0);
 
     auto drawBar = [&](int y, float value) {
         int xStart = 50; // position de début de la barre
