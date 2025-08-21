@@ -1,4 +1,5 @@
 #include <include/display.h>
+#include <string>
 
 void Display::begin() {
     tft.begin();
@@ -15,7 +16,7 @@ void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
     LufsS = constrain(LufsS, -70, 0);
     LufsM = constrain(LufsM, -70, 0);
 
-    auto drawBar = [&](int y, float value) {
+    auto drawBar = [&](int y, float value, std::string meterName) {
         int xStart = 50; // position de début de la barre
         int width = 250; // largeur max
         int height = 30; // "hauteur" de la barre
@@ -35,15 +36,25 @@ void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
         tft.fillRect(xStart, y, filled, height, color);
 
         // afficher valeur numérique
-        tft.fillRect(xStart+width+10, y, 60, height, ILI9341_BLACK);
-        tft.setCursor(xStart+width+10, y+6);
-        tft.setTextColor(color);
+
+        int xText = xStart + width - 70;
+
+        //tft.fillRect(xText, y, 70, height, ILI9341_BLACK);
+        tft.setCursor(xText, y+6);
+        tft.setTextColor(color, ILI9341_BLACK);
         tft.setTextSize(2);
         tft.print(value,1);
+
+        // afficher le type de meter
+
+        tft.setCursor(xStart - 25, y+6);
+        tft.setTextColor(ILI9341_CYAN);
+        tft.setTextSize(2);
+        tft.print(meterName.c_str());
     };
 
     // dessiner chaque barre
-    drawBar(40, LufsI);
-    drawBar(100, LufsS);
-    drawBar(160, LufsM);
+    drawBar(40, LufsI, "I");
+    drawBar(100, LufsS, "S");
+    drawBar(160, LufsM, "M");
 }

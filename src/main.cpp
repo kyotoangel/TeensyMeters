@@ -18,5 +18,5 @@ void loop() {
 
   display.drawLUFSmeter(LufsI, LufsS, LufsM);
 
-  delay(50);
+  delay(500);
 }
