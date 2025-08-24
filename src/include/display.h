@@ -15,10 +15,12 @@
 class Display {
     public : 
         void begin(); // déclaration de la fonction d'initialisation
-        void drawLUFSmeter(float LufsI, float LufsS, float LufsM); // déclaration de la fonction de dessin des barres LUFS
+        void drawLUFSmeter(float LufsI, float LufsS, float LufsM);
         // LufsI = LUFS intégrés / LufsS = LUFS short-term / LufsM = LUFS momentary
+        void drawSpectrogramMock(); // fonction Mock pour le test sans sampling
     private :
         ILI9341_t3n tft = ILI9341_t3n(TFT_CS, TFT_DC, TFT_RST);
+        int specX = 0; // position courante en x pour le spectrogramme
 };
 
 #endif

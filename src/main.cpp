@@ -17,6 +17,7 @@ void loop() {
   float LufsM = random(-70, 1); // momentary (M)
 
   display.drawLUFSmeter(LufsI, LufsS, LufsM);
+  display.drawSpectrogramMock();
 
   delay(500);
 }

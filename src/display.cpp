@@ -5,10 +5,6 @@ void Display::begin() {
     tft.begin();
     tft.setRotation(3);
     tft.fillScreen(ILI9341_BLACK);
-    tft.setTextColor(ILI9341_GREEN);
-    tft.setTextSize(2);
-    tft.setCursor(10, 10);
-    tft.println("Display init ok !");
 }
 
 void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
@@ -17,9 +13,9 @@ void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
     LufsM = constrain(LufsM, -70, 0);
 
     auto drawBar = [&](int y, float value, std::string meterName) {
-        int xStart = 50; // position de début de la barre
-        int width = 250; // largeur max
-        int height = 30; // "hauteur" de la barre
+        int xStart = 30; // position de début de la barre
+        int width = 200; // largeur max
+        int height = 10; // "hauteur" de la barre
 
         // calcul du remplissage de la barre en pixels
         int filled = map(value, -70, 0, 0, width);
@@ -47,14 +43,36 @@ void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
 
         // afficher le type de meter
 
-        tft.setCursor(xStart - 25, y+6);
+        tft.setCursor(xStart - 25, y);
         tft.setTextColor(ILI9341_CYAN);
         tft.setTextSize(2);
         tft.print(meterName.c_str());
     };
 
     // dessiner chaque barre
-    drawBar(40, LufsI, "I");
-    drawBar(100, LufsS, "S");
-    drawBar(160, LufsM, "M");
+    drawBar(0, LufsI, "I");
+    drawBar(35, LufsS, "S");
+    drawBar(70, LufsM, "M");
+}
+
+void Display::drawSpectrogramMock() {
+    int specTop = 120;  // zone spectrogramme (bas de l'écran)
+    int specHeight = 120; // moitié de l'écran
+
+    if (specX >= tft.width()) {
+        specX = 0;
+        tft.fillRect(0, specTop, tft.width(), specHeight, ILI9341_BLACK);
+    }
+
+    for (int f = 0; f < 50; f++) {
+        int dB = random(-70, 0);
+        int y = map(dB, -70, 0, specTop+specHeight-1, specTop);
+
+        // couleur selon amplitude
+        uint16_t color = tft.color565(255 + dB*3, max(0, 100+dB*2), 0);
+
+        tft.drawPixel(specX, y, color);
+    }
+
+    specX++;
 }
