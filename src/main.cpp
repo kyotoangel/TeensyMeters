@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <include/display.h>
+#include <include/audioProcessing.h>
+#include <include/sampler.h>
 
 // git pull origin main pour actualiser les fichiers :)
 

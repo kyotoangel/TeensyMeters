@@ -59,28 +59,6 @@ void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
     drawBar(70, LufsM, "M");
 }
 
-void Display::drawSpectrum(const float *fftBins, int nBins, float sampleRate) {
-
-    // variables specTop, specHeight et specWidth en haut !
-
-    // effacer zone du spectrum
-    tft.fillRect(0, specTop, specWidth, specHeight, ILI9341_BLACK);
-
-    // tracer axe abscisses
-    tft.drawLine(0, specTop+specHeight-1, specWidth, specTop+specHeight-1, ILI9341_WHITE);
-
-    // dessiner la courbe fft
-    for (int i = 0; i < nBins-1; i++) {
-        int x1 = map(i, 0, nBins-1, 0, specWidth-1);
-        int y1 = map(constrain(fftBins[i], -70, 0), -70, 0, specTop+specHeight-1, specTop);
-
-        int x2 = map(i+1, 0, nBins-1, 0, specWidth-1);
-        int y2 = map(constrain(fftBins[i+1], -70, 0), -70, 0, specTop+specHeight-1, specTop);
-
-        tft.drawLine(x1, y1, x2, y2, ILI9341_GREEN);
-    }
-}
-
 void Display::drawSpectrumLines(float sampleRate) {
     // variables specTop, specHeight et specWidth en header !
 
@@ -113,6 +91,44 @@ void Display::drawSpectrumLines(float sampleRate) {
             tft.print("k");
         } else {
             tft.print(f);
+        }
+    }
+
+}
+
+void Display::drawSpectrum(const float *fftBins, int nBins, float sampleRate) {
+
+    // variables specTop, specHeight et specWidth en haut !
+
+    // effacer zone du spectrum
+    tft.fillRect(0, specTop, specWidth, specHeight, ILI9341_BLACK);
+
+    // tracer axe abscisses
+    tft.drawLine(0, specTop+specHeight-1, specWidth, specTop+specHeight-1, ILI9341_WHITE);
+
+    drawSpectrumLines(48000.0f);
+
+    // dessiner la courbe fft
+    for (int i = 0; i < nBins-1; i++) {
+        float f1 = (i * sampleRate / 2.0) / nBins;  // frequency bin i
+        float f2 = ((i+1) * sampleRate / 2.0) / nBins; // frequency bin i+1
+
+        int x1 = (int)((log10(f1) - log10(20)) / (log10(sampleRate/2) - log10(20)) * specWidth);
+        int x2 = (int)((log10(f2) - log10(20)) / (log10(sampleRate/2) - log10(20)) * specWidth);
+
+        int y1 = map(constrain(fftBins[i], -70, 0), -70, 0, specTop+specHeight-1, specTop);
+        int y2 = map(constrain(fftBins[i+1], -70, 0), -70, 0, specTop+specHeight-1, specTop);
+
+        // couleur selon amplitude
+
+        uint16_t color = ILI9341_GREEN;
+        if (fftBins[i] > -30) color = ILI9341_YELLOW;
+        if (fftBins[i] > -15) color = ILI9341_RED;
+
+        // tracer remplissage
+
+        for (int x = x1; x <= x2; x++) {
+            tft.drawLine(x, specTop+specHeight-1, x, (y1+y2)/2, color);
         }
     }
 }
