@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <include/display.h>
 
+// git pull origin main pour actualiser les fichiers :)
+
 // création d'un objet global display
 Display display;
 
@@ -8,6 +10,7 @@ void setup() {
   Serial.begin(9600);
   //appel de la fonction d'initialisation du display
   display.begin();
+  display.drawSpectrumLines(48000.0f);
 }
 
 void loop() {

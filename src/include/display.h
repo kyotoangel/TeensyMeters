@@ -17,11 +17,17 @@ class Display {
         void begin(); // déclaration de la fonction d'initialisation
         void drawLUFSmeter(float LufsI, float LufsS, float LufsM);
         // LufsI = LUFS intégrés / LufsS = LUFS short-term / LufsM = LUFS momentary
-        void drawSpectrum(const float *fftBins, int nBins);
+        void drawSpectrum(const float *fftBins, int nBins, float sampleRate);
         void drawSpectrumMock(); // mock = a des fins de tests, valeurs aléatoires.
+        void drawSpectrumLines(float sampleRate); // dessin des lignes verticales et horizontales (dB / Hz)
     private :
         ILI9341_t3n tft = ILI9341_t3n(TFT_CS, TFT_DC, TFT_RST);
         int specX = 0; // position courante en x pour le spectrogramme
+
+        // variables pour drawSpectrum et drawSpectrumLines
+        int specTop;
+        int specHeight;
+        int specWidth;
 };
 
 #endif

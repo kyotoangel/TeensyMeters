@@ -3,8 +3,12 @@
 
 void Display::begin() {
     tft.begin();
-    tft.setRotation(3);
+    tft.setRotation(1);
     tft.fillScreen(ILI9341_BLACK);
+    // variables pour drawSpectrum et drawSpectrumLines
+    specTop = 140;
+    specHeight = 100;
+    specWidth = tft.width();
 }
 
 void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
@@ -55,10 +59,9 @@ void Display::drawLUFSmeter(float LufsI, float LufsS, float LufsM) {
     drawBar(70, LufsM, "M");
 }
 
-void Display::drawSpectrum(const float *fftBins, int nBins) {
-    int specTop = 60;
-    int specHeight = 150;
-    int specWidth = tft.width();
+void Display::drawSpectrum(const float *fftBins, int nBins, float sampleRate) {
+
+    // variables specTop, specHeight et specWidth en haut !
 
     // effacer zone du spectrum
     tft.fillRect(0, specTop, specWidth, specHeight, ILI9341_BLACK);
@@ -78,11 +81,47 @@ void Display::drawSpectrum(const float *fftBins, int nBins) {
     }
 }
 
+void Display::drawSpectrumLines(float sampleRate) {
+    // variables specTop, specHeight et specWidth en header !
+
+    // tracer la grille horizontale (niveaux dB)
+    for (int dB = -60; dB <= 0; dB += 20) {
+        int y = map(dB, -70, 0, specTop+specHeight-1, specTop);
+        tft.drawLine(0, y, specWidth, y, ILI9341_DARKGREY);
+        tft.setCursor(2, y-7);
+        tft.setTextColor(ILI9341_DARKGREY);
+        tft.setTextSize(1);
+        tft.print(dB);
+    }
+
+    // tracer la grille verticale (fréquences log)
+    int freqs[] = {50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000};
+
+    for (int f : freqs) {
+        float norm = log10(f) - log10(20);
+        float denom = log10(sampleRate/2) - log10(20);
+        int x = (int)(norm / denom * specWidth);
+
+        tft.drawLine(x, specTop, x, specTop+specHeight, ILI9341_DARKGREY);
+
+        tft.setCursor(x+2, specTop+specHeight-10);
+        tft.setTextColor(ILI9341_DARKGREY);
+        tft.setTextSize(1);
+
+        if (f >= 1000) {
+            tft.print(f/1000);
+            tft.print("k");
+        } else {
+            tft.print(f);
+        }
+    }
+}
+
 void Display::drawSpectrumMock() {
     const int N = 64; // nb de bandes fft simulées
     float mock[N];
     for (int i=0; i < N; i++) {
         mock[i] = random(-70, 0); // dB aléatoires
     }
-    drawSpectrum(mock,N);
+    drawSpectrum(mock,N, 48000.0f);
 }
