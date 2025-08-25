@@ -12,7 +12,6 @@ void setup() {
   Serial.begin(9600);
   //appel de la fonction d'initialisation du display
   display.begin();
-  display.drawSpectrumLines(48000.0f);
 }
 
 void loop() {
@@ -25,5 +24,5 @@ void loop() {
 
   display.drawSpectrumMock();
 
-  delay(500);
+  delay(32);
 }
