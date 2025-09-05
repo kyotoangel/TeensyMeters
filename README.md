@@ -6,7 +6,7 @@ So this project is open source, and you could simply recreate it with :
 - An ILI9341 screen
 - A Teensy Audio Shield
 - Visual Studio Code and Platform.io
-- A copy of this source code in VS code and simply uploading it to your teensy ! (I listed the pins I'm using for using the screens, they don't interfere with the audio shield pins)
+- A copy of this source code in VS code and simply uploading it to your teensy ! (I listed the pins I'm using for using the screens, they don't interfere with the audio shield pins, since I'm only using the I2S bus to sample audio)
 
 
 # 2 - Breadboard routing
