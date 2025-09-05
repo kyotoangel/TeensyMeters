@@ -19,7 +19,7 @@ The best way to do it is by following this kind of schematic (shoutout Leonard f
 
 By doing so and using a MOSHFET, you can use the battery / external usb C power supply and still be able to switch and use the teensy micro usb input to program it ! (priority given to the micro usb input of the teensy)
 
-(for the USB C / battery supply, i'm using this one : https://aliexpress.com/item/1005003586772730.html)
+(for the USB C / battery supply, i'm using this one, feel free to use whatever else if you have charge protection : https://aliexpress.com/item/1005003586772730.html)
 
 
 # 2 - Breadboard routing
