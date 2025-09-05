@@ -13,7 +13,7 @@ The project is still in development, I plan on regularly updating it to add more
 ## 1.2 - Aditionnal features
 ### 1.2.1 - External power supply
 I want this project to be as portable as possible (by adding a battery to power up the teensy), to do so you'll need to dissociate "Vusb" and "Vin" pads on the teensy, more info here : https://www.pjrc.com/teensy/external_power.html
-The best way to do is with following this schematic (shoutout Leonard for the idea and the explaination) : ![WhatsApp Image 2025-08-08 à 02 26 45_915d9bfd](https://github.com/user-attachments/assets/b988fee9-76e9-4d38-84d2-4c3e7aaea560)
+The best way to do it is by following this kind of schematic (shoutout Leonard for the idea and the explaination) : ![WhatsApp Image 2025-08-08 à 02 26 45_915d9bfd](https://github.com/user-attachments/assets/b988fee9-76e9-4d38-84d2-4c3e7aaea560)
 By doing so and using a MOSHFET, you can use the battery / external usb C power supply and still be able to switch and use the teensy micro usb input to program it !
 
 (for the USB C / battery supply, i'm using this one : https://aliexpress.com/item/1005003586772730.html)
