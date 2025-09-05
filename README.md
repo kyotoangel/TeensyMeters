@@ -8,6 +8,16 @@ So this project is open source, and you could simply recreate it with :
 - Visual Studio Code and Platform.io
 - A copy of this source code in VS code and simply uploading it to your teensy ! (I listed the pins I'm using for using the screens, they don't interfere with the audio shield pins, since I'm only using the I2S bus to sample audio)
 
+The project is still in development, I plan on regularly updating it to add more features !
+
+## 1.2 - Aditionnal features
+### 1.2.1 - External power supply
+I want this project to be as portable as possible (by adding a battery to power up the teensy), to do so you'll need to dissociate "Vusb" and "Vin" pads on the teensy, more info here : https://www.pjrc.com/teensy/external_power.html
+The best way to do is with following this schematic (shoutout Leonard for the idea and the explaination) : ![WhatsApp Image 2025-08-08 à 02 26 45_915d9bfd](https://github.com/user-attachments/assets/b988fee9-76e9-4d38-84d2-4c3e7aaea560)
+By doing so and using a MOSHFET, you can use the battery / external usb C power supply and still be able to switch and use the teensy micro usb input to program it !
+
+(for the USB C / battery supply, i'm using this one : https://aliexpress.com/item/1005003586772730.html)
+
 
 # 2 - Breadboard routing
 ## 2.1 - LCD display connections
