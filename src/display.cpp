@@ -152,3 +152,29 @@ void Display::drawSpectrumMock() {
     }
     drawSpectrum(mock,N, 48000.0f);
 }
+
+void Display::drawVUMeter(float dB) {
+    int vuTop = 40;
+    int vuHeight = 20;
+    int vuWidth = tft.width();
+
+    // normaliser valeur dB (-90 à 0)
+    float norm = (dB + 90.0) / 90.0;
+    if (norm < 0) norm = 0;
+    if (norm > 0) norm = 1;
+
+    int filled = (int)(vuWidth * norm);
+
+    // fond noir
+    tft.fillRect(0, vuTop, vuWidth, vuHeight, ILI9341_BLACK);
+
+    // barre verte/jaune/rouge
+    uint16_t color = ILI9341_GREEN;
+    if (dB > -12) color = ILI9341_YELLOW;
+    if (dB > -3) color = ILI9341_RED;
+
+    tft.fillRect(0, vuTop, filled, vuHeight, color);
+
+    //cadre
+    tft.drawRect(0, vuTop, vuWidth, vuHeight, ILI9341_WHITE);
+}

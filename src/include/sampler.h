@@ -13,11 +13,17 @@ class Sampler {
     void begin();
     bool available();
     void getLogBands(float *bands, int nBands);
+    bool availableRMS();
+    float getRMSdB();
 
     private :
     AudioInputI2S           i2s1;
     AudioAnalyzeFFT1024     fft1024;
-    AudioConnection*        patchCord;
+    AudioAnalyzeRMS         rms1;
+
+    AudioConnection*        patchCordFFT;
+    AudioConnection*        patchCordRMS;
+
     AudioControlSGTL5000    sgtl5000_1;
 };
 #endif

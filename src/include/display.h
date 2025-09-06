@@ -21,6 +21,7 @@ class Display {
         void drawSpectrumMock(); // mock = a des fins de tests, valeurs aléatoires.
         void drawSpectrumLines(float sampleRate); // dessin des lignes verticales et horizontales (dB / Hz)
         void drawThickLine(int x0, int y0, int x1, int y1, uint16_t color, int thickness);
+        void drawVUMeter(float dB);
     private :
         ILI9341_t3n tft = ILI9341_t3n(TFT_CS, TFT_DC, TFT_RST);
         int specX = 0; // position courante en x pour le spectrogramme
