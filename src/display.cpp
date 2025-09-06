@@ -177,4 +177,10 @@ void Display::drawVUMeter(float dB) {
 
     //cadre
     tft.drawRect(0, vuTop, vuWidth, vuHeight, ILI9341_WHITE);
+
+    tft.fillRect(0, 0, 80, 40, ILI9341_WHITE);
+    tft.setCursor(0, vuHeight);
+    tft.setTextColor(color);
+    tft.setTextSize(2);
+    tft.print(dB);
 }

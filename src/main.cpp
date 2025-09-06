@@ -22,12 +22,13 @@ void loop() {
   // float LufsM = random(-70, 1); // momentary (M)
 
   // display.drawLUFSmeter(LufsI, LufsS, LufsM);
-  // if (sampler.available()) {
-  //   const int nBands = 30; // nombre de bandes de fréquences
-  //   float bands[nBands];
-  //   sampler.getLogBands(bands, nBands);
-  //   display.drawSpectrum(bands, nBands, AUDIO_SAMPLE_RATE_EXACT);
-  // }
+
+  if (sampler.available()) {
+    const int nBands = 30; // nombre de bandes de fréquences
+    float bands[nBands];
+    sampler.getLogBands(bands, nBands);
+    display.drawSpectrum(bands, nBands, AUDIO_SAMPLE_RATE_EXACT);
+  }
 
   if (sampler.availableRMS()) {
     float rms = sampler.getRMSdB();
