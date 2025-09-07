@@ -10,7 +10,7 @@ void Sampler::begin() {
 
     sgtl5000_1.enable();
     sgtl5000_1.inputSelect(AUDIO_INPUT_LINEIN);
-    sgtl5000_1.volume(1); // volume max = 1
+    sgtl5000_1.volume(1.0f); // volume max = 1
 
     fft1024.windowFunction(AudioWindowHanning1024); // lissage
 }
