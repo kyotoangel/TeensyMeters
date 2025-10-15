@@ -27,3 +27,7 @@ By doing so and using a MOSHFET, you can use the battery / external usb C power 
 I used the following scheme to route the LCD screen (ILI9341 screen) - I didn't used the touchscreen features for this project
 <img width="1535" height="572" alt="Display Schematics" src="https://github.com/user-attachments/assets/2e32194e-9094-4bf9-8446-18eb0c0a96b8" />
 ## 2.2 - Teensy Audio Shield connections
+Basically, soldering the whole teensy audio shield should work, if you want you can still use the analog inputs of the teensy without using the Shield, but the audio Shield provides I2S connection, and a better sampling of the audio (on analog pins, downsampling phenomenoms are occuring for frequencies superior to 5kHz).
+Also, if you still want to use the analog pins instead of the shield, you'd have to DC offset the audio voltage, because analogRead() can't read negative values and just sends a 0 for negative voltages... With a little electronic circuit you could DC offset, but it would display the DC Offset on the FFT soooo... A shield solves all these problems
+Anyway, this project uses the audio shield, so I'd recommend you to get one.
+## 2.3 - FFT performances and LUFS analysis
